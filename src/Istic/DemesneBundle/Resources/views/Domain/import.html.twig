@@ -1,0 +1,17 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}DoctrineBundle:Domain:modify{% endblock %}
+
+{% block body %}
+<h1>Welcome to the Domain:import page</h1>
+
+{% for domain in domains %}
+    <li>{{ domain.0 }} {{ domain.1 }} </li>
+{% endfor %}
+
+<p>Add domains, one per line. Everything after the first comma, space or tab on each line is ignored (so you can paste in a whole CSV/TSV if you want to)</p>
+
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+{% endblock %}

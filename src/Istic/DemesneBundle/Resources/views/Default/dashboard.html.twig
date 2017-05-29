@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_3_horizontal_layout.html.twig' %}
+{% block body %}
+<div class="row">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<ul>
+			{% for domain in domains %}
+			    <li>{{ domain.name }} <a href="{{ path('domain_remove', {'id' : domain.id } ) }}" class="confirmthis">Delete</a></li>
+			{% else %}
+			    <li>No domains defined</li>
+			{% endfor %}
+		</ul>
+
+		{{ form_start(form) }}
+		{{ form_widget(form) }}
+		{{ form_end(form) }}
+	</div>	
+</div>
+{% endblock %}
+{% block javascript %}
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	$('.confirmthis').each(function(target){
+			console.log(target);
+	});
+	$('.confirmthis').click(function(thing){
+		result = window.confirm("Sure?");
+		if(result){
+			href = $(thing.target)
+			$('<form action="'+href.attr("href")+'" method="POST"></form>').appendTo('body').submit();
+		}
+		return false;
+	});
+})
+
+</script>
+
+{% endblock %}

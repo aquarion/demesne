@@ -1,0 +1,46 @@
+Istic\DemesneBundle\Entity\SSLCert:
+    type: entity
+    table: null
+    repositoryClass: Istic\DemesneBundle\Repository\SSLCertRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        data:
+            type: json_array
+            nullable: true
+        last_data_run:
+            type: datetime
+            nullable: true
+        next_data_run:
+            type: datetime
+            nullable: true
+        expires_at:
+            type: datetime
+            nullable: true
+            column: expiresAt
+        created_at:
+            type: datetime
+            nullable: true
+            column: createdAt
+        modified_at:
+            type: datetime
+            nullable: true
+            column: modifiedAt
+    lifecycleCallbacks:
+        prePersist: [updatedTimestamps]
+
+    oneToMany:
+        domains:
+            targetEntity: Domain
+            mappedBy: cert
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: certs
+            joinColumn:
+                name: user_id
+                referencedColumnName: id

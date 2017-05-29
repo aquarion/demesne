@@ -1,3 +1,28 @@
 demesne_homepage:
     path:     /
     defaults: { _controller: DemesneBundle:Default:index }
+    methods:  [GET, HEAD, POST]
+
+
+domain_remove:
+  path: /domain/remove/{id}
+  defaults: { _controller: DemesneBundle:Domain:remove }
+  methods:  [POST]
+
+domain_removeGET:
+  path: /domain/remove/{id}
+  defaults: { _controller: DemesneBundle:Domain:view }
+  methods:  [GET]
+  defaults:
+    _controller: FrameworkBundle:Redirect:redirect
+    route: domain_view
+
+domain_view:
+  path: /domain/view/{id}
+  defaults: { _controller: DemesneBundle:Domain:view }
+  methods:  [GET]
+
+domain_import:
+  path: /domain/import
+  defaults: { _controller: DemesneBundle:Domain:import }
+  methods:  [GET, POST]

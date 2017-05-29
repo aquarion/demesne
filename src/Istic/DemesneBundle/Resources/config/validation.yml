@@ -1,0 +1,11 @@
+Istic\DemesneBundle\Entity\Domain:
+    constraints:
+        - Callback: validate
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: 
+            fields: [user, name]
+            message: "You've already recorded that domain"
+    properties:
+        user:
+            - NotBlank: { message: "User cannot be blank" }
+        name:
+            - NotBlank: { message: "You need to specify a domain name" }

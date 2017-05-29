@@ -1,0 +1,53 @@
+
+Istic\DemesneBundle\Entity\Domain:
+    type:  entity
+    table: demesne_domain
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 256
+        registrar:
+            nullable: true
+            type: string
+            length: 256
+        data:
+            type: json_array
+            nullable: true
+        last_data_run:
+            type: datetime
+            nullable: true
+        next_data_run:
+            type: datetime
+            nullable: true
+        expires_at:
+            type: datetime
+            nullable: true
+        created_at:
+            type: datetime
+            nullable: true
+            column: createdAt
+        modified_at:
+            type: datetime
+            nullable: true
+            column: modifiedAt
+    lifecycleCallbacks:
+        prePersist: [updatedTimestamps]
+
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: domains
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+        cert:
+            targetEntity: SSLCert
+            inversedBy: domains
+            joinColumn:
+                name: cert_id
+                referencedColumnName: id
